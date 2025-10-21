@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escola La Canaleta</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -395,41 +395,18 @@
 
         .news-text {
             padding: 30px;
+            text-align: center;
         }
 
-        .news-item {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .news-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .news-item h4 {
+        .news-text h4 {
             color: var(--accent);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
         }
 
-        .news-item h4 i {
-            color: var(--primary);
-        }
-
-        .news-date {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+        .news-text p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
         /* Activities Section */
@@ -718,6 +695,133 @@
             font-size: 1.8rem;
         }
 
+        /* Chat Assistant */
+        .chat-assistant {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .chat-assistant:hover {
+            transform: scale(1.1) rotate(-10deg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .chat-assistant i {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 110px;
+            left: 25px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -748,6 +852,11 @@
             
             .hero p {
                 font-size: 1.4rem;
+            }
+            
+            .chat-container {
+                width: 300px;
+                height: 400px;
             }
         }
 
@@ -780,6 +889,13 @@
             h2 {
                 font-size: 2.3rem;
             }
+            
+            .chat-container {
+                width: 280px;
+                height: 380px;
+                left: 15px;
+                bottom: 100px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -798,6 +914,12 @@
             .contact-item {
                 min-width: 100%;
             }
+            
+            .chat-container {
+                width: 90%;
+                left: 5%;
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -811,9 +933,9 @@
         
         <div class="nav-container">
             <div class="custom-images">
-                <!-- Reemplaza estas URLs con tus propias imágenes -->
-                <img src="Bandera_de_España_(sin_escudo).svg.png" alt="Imagen 1" class="custom-image">
-                <img src="depositphotos_53777355-stock-photo-catalonia-flag.jpg" alt="Imagen 2" class="custom-image">
+                <!-- Imágenes para cambio de idioma -->
+                <img src="depositphotos_53777355-stock-photo-catalonia-flag.jpg" alt="Català" class="custom-image" id="flag-ca">
+                <img src="Bandera_de_España_(sin_escudo).svg.png" alt="Español" class="custom-image" id="flag-es">
             </div>
             
             <div class="hamburger">
@@ -833,9 +955,9 @@
             <a href="#social"><i class="fas fa-share-alt"></i>Xarxes Socials</a>
             
             <div class="custom-images">
-                <!-- Reemplaza estas URLs con tus propias imágenes -->
-                <img src="Bandera_de_España_(sin_escudo).svg.png" alt="Imagen 1" class="custom-image">
-                <img src="depositphotos_53777355-stock-photo-catalonia-flag.jpg" alt="Imagen 2" class="custom-image">
+                <!-- Imágenes para cambio de idioma en móvil -->
+                <img src="depositphotos_53777355-stock-photo-catalonia-flag.jpg" alt="Català" class="custom-image" id="flag-ca-mobile">
+                <img src="Bandera_de_España_(sin_escudo).svg.png" alt="Català" alt="Español" class="custom-image" id="flag-es-mobile">
             </div>
         </div>
     </header>
@@ -877,28 +999,15 @@
                 </div>
                 <div class="news-content" id="news-content">
                     <div class="news-text">
-                        <div class="news-item">
-                            <span class="news-date">15 Maig 2023</span>
-                            <h4><i class="fas fa-graduation-cap"></i> Festa de Final de Curs</h4>
-                            <p>Este any celebrarem la festa de final de curs el proper divendres 23 de juny. Hi haurà actuacions dels alumnes, tallers i moltes sorpreses. Tota la comunitat educativa està convidada!</p>
-                        </div>
-                        
-                        <div class="news-item">
-                            <span class="news-date">8 Maig 2023</span>
-                            <h4><i class="fas fa-seedling"></i> Projecte Horta Ecològica</h4>
-                            <p>Els nostres alumnes de 3r i 4t han començat un projecte d'horta ecològica al pati de l'escola. Han plantat tomàquets, enciams i pastanagues. Una experiència educativa fantàstica!</p>
-                        </div>
-                        
-                        <div class="news-item">
-                            <span class="news-date">25 Abril 2023</span>
-                            <h4><i class="fas fa-trophy"></i> Concurs de Dibuix</h4>
-                            <p>Ja tenim els guanyadors del concurs de dibuix "La meva escola ideal". Felicitats a tots els participants! Els dibuixos guanyadors estaran exposats al passadís principal durant tot el mes de maig.</p>
-                        </div>
-                        
-                        <div class="news-item">
-                            <span class="news-date">10 Abril 2023</span>
-                            <h4><i class="fas fa-book"></i> Setmana del Llibre</h4>
-                            <p>La propera setmana celebrarem la Setmana del Llibre amb activitats especials: contacontes, intercanvi de llibres i la visita d'un escriptor local. Una oportunitat perfecta per fomentar la lectura!</p>
+                        <h4>Torna aviat per no perdre't res!</h4>
+                        <p>Mentre tant, ens pots seguir a les nostres xarxes socials per estar al dia de totes les nostres activitats i novetats.</p>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/escola_la_canaleta/" class="social-icon" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://x.com/Esc_La_Canaleta?fbclid=PAZXh0bgNhZW0CMTEAAacRJn5oZOjIXyIPGzZXkR48l-RgwhMhi85k-0xnCNMsz9lmJT-eQSxhT-Sq3w_aem_s2oLbROLyXy_mU-kJfZJ5Q" class="social-icon" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -913,29 +1022,30 @@
             <div class="activities-grid">
                 <div class="activity-card">
                     <div class="activity-image">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80" alt="Tallers creatius">
+                        <img src="Captura de pantalla 2025-10-21 183813.png" alt="Sortida al parc d'aventures">
                     </div>
                     <div class="activity-content">
-                        <h3>Tallers Creatius</h3>
-                        <p>Desenvolupem la creativitat i la imaginació dels nostres alumnes a través de tallers d'art, música i teatre. Creiem en l'expressió artística com a eina fonamental per al desenvolupament integral.</p>
+                        <h3>Sortida al parc d'aventures Jungle Trek</h3>
+                        <p>El passat dilluns 12 de Maig els infants de 3r van anar d'excursió al parc d'aventures Jungle Trek. Van realitzar diversos circuits d'equilibris i es van tirar per múltiples tirolines. Els circuits estan distribuïts en una zona de bosc i organitzats en diferents nivells. Van començar al nivell inicial però conforme van anar adquirint confiança en sí mateixos, van augmentar de nivell, alçada i dificultat.</p>
+                        <p>Ens van demostrar que són uns valents/es!</p>
                     </div>
                 </div>
                 <div class="activity-card">
                     <div class="activity-image">
-                        <img src="https://images.unsplash.com/photo-1551524164-6caac0541f28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Esports">
+                        <img src="Captura de pantalla 2025-10-21 183827.png" alt="Sant Jordi">
                     </div>
                     <div class="activity-content">
-                        <h3>Esports i Activitat Física</h3>
-                        <p>Promovem l'hàbit esportiu i la vida activa amb activitats adaptades a cada edat. Disposem d'instal·lacions esportives i un programa d'activitats extraescolars esportives.</p>
+                        <h3>Sant Jordi 2025</h3>
+                        <p>Aquest 23 d'abril, l'escola ha tornat a viure una bonica diada de Sant Jordi. Els i les alumnes han visitat el castell de Vila-seca, han pogut veure totes les paradetes i gaudir del gran ambient que hi havia en aquell moment. L'alumnat de sisè, ha pogut viure l'experiència de muntar una parada i vendre llibres amb l'ajuda dels seus mestres i la col·laboració de les famílies.</p>
                     </div>
                 </div>
                 <div class="activity-card">
                     <div class="activity-image">
-                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Natura">
+                        <img src="Captura de pantalla 2025-10-21 183842.png" alt="Certamen de lectura">
                     </div>
                     <div class="activity-content">
-                        <h3>Sortides i Natura</h3>
-                        <p>Organitzem sortides educatives i activitats a l'aire lliure per connectar amb el medi ambient i aprendre de manera vivencial. El nostre pati natural és un espai privilegiat per a aquest tipus d'activitats.</p>
+                        <h3>Certamen de lectura en veu alta</h3>
+                        <p>Aquest segon trimestre s'han dut a terme les jornades de lectura en veu alta. Aquest certamen literari consta en llegir un text en veu alta amb la màxima expressivitat possible, bona entonació i fluïdesa. A l'escola vam passar uns dies fent un concurs intern voluntari per a poder representar-nos. Les nostres representants van estar l'Adah de 4t i la Alma de 6è, enhorabona a les dues!</p>
                     </div>
                 </div>
             </div>
@@ -1000,6 +1110,27 @@
         <i class="fas fa-phone"></i>
     </div>
 
+    <!-- Chat Assistant -->
+    <div class="chat-assistant" id="chat-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3>Assistent Virtual</h3>
+            <button class="close-chat" id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                Hola! Sóc l'assistent virtual de l'Escola La Canaleta. Com puc ajudar-te?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Escriu el teu missatge...">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <script>
         // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
@@ -1016,6 +1147,131 @@
             sections.forEach(section => {
                 observer.observe(section);
             });
+            
+            // Language switching
+            const flagEs = document.getElementById('flag-es');
+            const flagCa = document.getElementById('flag-ca');
+            const flagEsMobile = document.getElementById('flag-es-mobile');
+            const flagCaMobile = document.getElementById('flag-ca-mobile');
+            
+            // Default language is Catalan
+            let currentLang = 'ca';
+            
+            // Language content
+            const translations = {
+                'es': {
+                    'hero-title': 'Escuela La Canaleta',
+                    'hero-desc': 'Escuela pública inmersa en el cambio educativo. Haciendo los sueños realidad.',
+                    'about-title': 'Sobre Nosotros',
+                    'about-text1': 'La Escuela La Canaleta es un centro educativo público situado en el corazón de Vila-seca, Tarragona. Con más de 40 años de historia, nos hemos consolidado como un referente en educación infantil y primaria en la comarca.',
+                    'about-text2': 'Nuestro proyecto educativo se basa en una metodología activa y participativa, donde el alumno es el verdadero protagonista de su aprendizaje. Trabajamos para ofrecer una educación integral que atienda las necesidades académicas, emocionales y sociales de cada niño y niña.',
+                    'about-text3': 'Disponemos de instalaciones modernas y adaptadas a las necesidades del siglo XXI, con aulas espaciosas, patios naturales, biblioteca, aula de informática y espacios específicos para las artes y la actividad física.',
+                    'news-title': 'Noticias',
+                    'news-header': 'Actualizaciones y Novedades',
+                    'news-text': '¡Vuelve pronto para no perderte nada! Mientras tanto, puedes seguirnos en nuestras redes sociales para estar al día de todas nuestras actividades y novedades.',
+                    'activities-title': 'Nuestras Actividades',
+                    'activity1-title': 'Salida al parque de aventuras Jungle Trek',
+                    'activity1-text': 'El pasado lunes 12 de Mayo los niños de 3º fueron de excursión al parque de aventuras Jungle Trek. Realizaron diversos circuitos de equilibrios y se tiraron por múltiples tirolinas. Los circuitos están distribuidos en una zona de bosque y organizados en diferentes niveles. Empezaron en el nivel inicial pero conforme fueron adquiriendo confianza en sí mismos, aumentaron de nivel, altura y dificultad. ¡Nos demostraron que son unos valientes!',
+                    'activity2-title': 'Sant Jordi 2025',
+                    'activity2-text': 'Este 23 de abril, la escuela ha vuelto a vivir una bonita jornada de Sant Jordi. Los y las alumnas han visitado el castillo de Vila-seca, han podido ver todos los puestos y disfrutar del gran ambiente que había en aquel momento. El alumnado de sexto, ha podido vivir la experiencia de montar un puesto y vender libros con la ayuda de sus maestros y la colaboración de las familias.',
+                    'activity3-title': 'Certamen de lectura en voz alta',
+                    'activity3-text': 'Este segundo trimestre se han llevado a cabo las jornadas de lectura en voz alta. Este certamen literario consiste en leer un texto en voz alta con la máxima expresividad posible, buena entonación y fluidez. En la escuela pasamos unos días haciendo un concurso interno voluntario para poder representarnos. Nuestras representantes fueron Adah de 4º y Alma de 6º, ¡enhorabuena a las dos!',
+                    'location-title': 'Dónde Estamos',
+                    'location-desc': 'Estamos situados en la calle Alfons I, 18, en el municipio de Vila-seca, Tarragona. Un entorno privilegiado cercano a la naturaleza y con buenas comunicaciones.',
+                    'contact-title': 'Contacto',
+                    'contact-phone': 'Teléfono',
+                    'contact-schedule': 'Horario',
+                    'contact-days': 'Lunes a Viernes',
+                    'contact-hours': '9:00 - 16:30 h',
+                    'call-button': 'Llama ahora',
+                    'social-title': 'Síguenos',
+                    'social-desc': 'Mantente informado de todas nuestras actividades y novedades a través de las redes sociales.',
+                    'footer': '&copy; 2023 Escuela La Canaleta. Todos los derechos reservados.',
+                    'chat-title': 'Asistente Virtual',
+                    'chat-placeholder': 'Escribe tu mensaje...',
+                    'chat-welcome': '¡Hola! Soy el asistente virtual de la Escuela La Canaleta. ¿En qué puedo ayudarte?'
+                },
+                'ca': {
+                    'hero-title': 'Escola La Canaleta',
+                    'hero-desc': 'Escola pública inmersa en el canvi educatiu. Fent els somnis realitat.',
+                    'about-title': 'Sobre Nosaltres',
+                    'about-text1': 'L\'Escola La Canaleta és un centre educatiu públic situat al cor de Vila-seca, Tarragona. Amb més de 40 anys d\'història, ens hem consolidat com un referent en educació infantil i primària a la comarca.',
+                    'about-text2': 'El nostre projecte educatiu es basa en una metodologia activa i participativa, on l\'alumne és el veritable protagonista del seu aprenentatge. Treballem per oferir una educació integral que atengui les necessitats acadèmiques, emocionals i socials de cada nen i nena.',
+                    'about-text3': 'Disposem d\'instal·lacions modernes i adaptades a les necessitats del segle XXI, amb aules espaioses, patis naturals, biblioteca, aula d\'informàtica i espais específics per a les arts i l\'activitat física.',
+                    'news-title': 'Notícies',
+                    'news-header': 'Actualitzacions i Novetats',
+                    'news-text': 'Torna aviat per no perdre\'t res! Mentre tant, ens pots seguir a les nostres xarxes socials per estar al dia de totes les nostres activitats i novetats.',
+                    'activities-title': 'Les Nostres Activitats',
+                    'activity1-title': 'Sortida al parc d\'aventures Jungle Trek',
+                    'activity1-text': 'El passat dilluns 12 de Maig els infants de 3r van anar d\'excursió al parc d\'aventures Jungle Trek. Van realitzar diversos circuits d\'equilibris i es van tirar per múltiples tirolines. Els circuits estan distribuïts en una zona de bosc i organitzats en diferents nivells. Van començar al nivell inicial però conforme van anar adquirint confiança en sí mateixos, van augmentar de nivell, alçada i dificultat. Ens van demostrar que són uns valents/es!',
+                    'activity2-title': 'Sant Jordi 2025',
+                    'activity2-text': 'Aquest 23 d\'abril, l\'escola ha tornat a viure una bonica diada de Sant Jordi. Els i les alumnes han visitat el castell de Vila-seca, han pogut veure totes les paradetes i gaudir del gran ambient que hi havia en aquell moment. L\'alumnat de sisè, ha pogut viure l\'experiència de muntar una parada i vendre llibres amb l\'ajuda dels seus mestres i la col·laboració de les famílies.',
+                    'activity3-title': 'Certamen de lectura en veu alta',
+                    'activity3-text': 'Aquest segon trimestre s\'han dut a terme les jornades de lectura en veu alta. Aquest certamen literari consta en llegir un text en veu alta amb la màxima expressivitat possible, bona entonació i fluïdesa. A l\'escola vam passar uns dies fent un concurs intern voluntari per a poder representar-nos. Les nostres representants van estar l\'Adah de 4t i la Alma de 6è, enhorabona a les dues!',
+                    'location-title': 'On Som',
+                    'location-desc': 'Estem situats al carrer Alfons I, 18, al municipi de Vila-seca, Tarragona. Un entorn privilegiat proper a la natura i amb bones comunicacions.',
+                    'contact-title': 'Contacte',
+                    'contact-phone': 'Telèfon',
+                    'contact-schedule': 'Horari',
+                    'contact-days': 'Dilluns a Divendres',
+                    'contact-hours': '9:00 - 16:30 h',
+                    'call-button': 'Truca ara',
+                    'social-title': 'Segueix-nos',
+                    'social-desc': 'Mantingues-te informat de totes les nostres activitats i novetats a través de les xarxes socials.',
+                    'footer': '&copy; 2023 Escola La Canaleta. Tots els drets reservats.',
+                    'chat-title': 'Assistent Virtual',
+                    'chat-placeholder': 'Escriu el teu missatge...',
+                    'chat-welcome': 'Hola! Sóc l\'assistent virtual de l\'Escola La Canaleta. Com puc ajudar-te?'
+                }
+            };
+            
+            // Function to change language
+            function changeLanguage(lang) {
+                currentLang = lang;
+                
+                // Update all text elements
+                document.querySelector('.hero h1').textContent = translations[lang]['hero-title'];
+                document.querySelector('.hero p').textContent = translations[lang]['hero-desc'];
+                document.querySelector('#about h2').textContent = translations[lang]['about-title'];
+                document.querySelectorAll('#about p')[0].textContent = translations[lang]['about-text1'];
+                document.querySelectorAll('#about p')[1].textContent = translations[lang]['about-text2'];
+                document.querySelectorAll('#about p')[2].textContent = translations[lang]['about-text3'];
+                document.querySelector('#news h2').textContent = translations[lang]['news-title'];
+                document.querySelector('#news-toggle h3').textContent = translations[lang]['news-header'];
+                document.querySelector('#news-content p').textContent = translations[lang]['news-text'];
+                document.querySelector('#activities h2').textContent = translations[lang]['activities-title'];
+                document.querySelectorAll('.activity-content h3')[0].textContent = translations[lang]['activity1-title'];
+                document.querySelectorAll('.activity-content p')[0].textContent = translations[lang]['activity1-text'];
+                document.querySelectorAll('.activity-content h3')[1].textContent = translations[lang]['activity2-title'];
+                document.querySelectorAll('.activity-content p')[1].textContent = translations[lang]['activity2-text'];
+                document.querySelectorAll('.activity-content h3')[2].textContent = translations[lang]['activity3-title'];
+                document.querySelectorAll('.activity-content p')[2].textContent = translations[lang]['activity3-text'];
+                document.querySelector('#location h2').textContent = translations[lang]['location-title'];
+                document.querySelector('#location p').textContent = translations[lang]['location-desc'];
+                document.querySelector('#contact h2').textContent = translations[lang]['contact-title'];
+                document.querySelectorAll('.contact-item h3')[0].textContent = translations[lang]['contact-phone'];
+                document.querySelectorAll('.contact-item h3')[1].textContent = translations[lang]['contact-schedule'];
+                document.querySelectorAll('.contact-item p')[2].textContent = translations[lang]['contact-days'];
+                document.querySelectorAll('.contact-item p')[3].textContent = translations[lang]['contact-hours'];
+                document.querySelector('.call-button').textContent = translations[lang]['call-button'];
+                document.querySelector('#social h2').textContent = translations[lang]['social-title'];
+                document.querySelector('#social p').textContent = translations[lang]['social-desc'];
+                document.querySelector('footer p').innerHTML = translations[lang]['footer'];
+                document.querySelector('.chat-header h3').textContent = translations[lang]['chat-title'];
+                document.querySelector('#chat-input').placeholder = translations[lang]['chat-placeholder'];
+                
+                // Update chat welcome message
+                const chatMessages = document.getElementById('chat-messages');
+                if (chatMessages.children.length === 1) {
+                    chatMessages.children[0].textContent = translations[lang]['chat-welcome'];
+                }
+            }
+            
+            // Event listeners for flags
+            flagEs.addEventListener('click', () => changeLanguage('es'));
+            flagCa.addEventListener('click', () => changeLanguage('ca'));
+            flagEsMobile.addEventListener('click', () => changeLanguage('es'));
+            flagCaMobile.addEventListener('click', () => changeLanguage('ca'));
             
             // Hamburger menu functionality
             const hamburger = document.querySelector('.hamburger');
@@ -1049,6 +1305,118 @@
             const floatingCall = document.getElementById('floating-call');
             floatingCall.addEventListener('click', () => {
                 window.location.href = 'tel:977783565';
+            });
+            
+            // Chat assistant functionality
+            const chatAssistant = document.getElementById('chat-assistant');
+            const chatContainer = document.getElementById('chat-container');
+            const closeChat = document.getElementById('close-chat');
+            const sendMessage = document.getElementById('send-message');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+            
+            chatAssistant.addEventListener('click', () => {
+                chatContainer.classList.toggle('active');
+            });
+            
+            closeChat.addEventListener('click', () => {
+                chatContainer.classList.remove('active');
+            });
+            
+            // Function to normalize text (remove accents and convert to lowercase)
+            function normalizeText(text) {
+                return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            }
+            
+            // Function to add message to chat
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to process user message and generate response
+            function processMessage(message) {
+                const normalizedMessage = normalizeText(message);
+                
+                // Check for keywords in the message
+                if (normalizedMessage.includes('hola') || normalizedMessage.includes('hello') || normalizedMessage.includes('bon dia') || normalizedMessage.includes('buenos dias')) {
+                    return currentLang === 'ca' 
+                        ? 'Hola! Com puc ajudar-te avui?'
+                        : '¡Hola! ¿En qué puedo ayudarte hoy?';
+                }
+                
+                if (normalizedMessage.includes('horari') || normalizedMessage.includes('horario') || normalizedMessage.includes('hores') || normalizedMessage.includes('horas')) {
+                    return currentLang === 'ca'
+                        ? 'El nostre horari és de dilluns a divendres de 9:00 a 16:30 h.'
+                        : 'Nuestro horario es de lunes a viernes de 9:00 a 16:30 h.';
+                }
+                
+                if (normalizedMessage.includes('telefon') || normalizedMessage.includes('telefono') || normalizedMessage.includes('contacte') || normalizedMessage.includes('contacto')) {
+                    return currentLang === 'ca'
+                        ? 'Pots trucar-nos al 977 78 35 65 o fer clic al botó de trucada de la pàgina.'
+                        : 'Puedes llamarnos al 977 78 35 65 o hacer clic en el botón de llamada de la página.';
+                }
+                
+                if (normalizedMessage.includes('ubicacio') || normalizedMessage.includes('ubicacion') || normalizedMessage.includes('on som') || normalizedMessage.includes('donde estamos') || normalizedMessage.includes('adreça') || normalizedMessage.includes('direccion')) {
+                    return currentLang === 'ca'
+                        ? 'Estem situats al carrer Alfons I, 18, Vila-seca, Tarragona. Pots veure la nostra ubicació exacta a la secció "On Som".'
+                        : 'Estamos situados en la calle Alfons I, 18, Vila-seca, Tarragona. Puedes ver nuestra ubicación exacta en la sección "Dónde Estamos".';
+                }
+                
+                if (normalizedMessage.includes('activitat') || normalizedMessage.includes('actividad') || normalizedMessage.includes('excursio') || normalizedMessage.includes('excursion') || normalizedMessage.includes('sortida') || normalizedMessage.includes('salida')) {
+                    return currentLang === 'ca'
+                        ? 'Tenim moltes activitats! Recentment hem fet una sortida al parc Jungle Trek, hem celebrat Sant Jordi i hem organitzat un certamen de lectura. Pots llegir-ne més a la secció "Les Nostres Activitats".'
+                        : '¡Tenemos muchas actividades! Recientemente hemos hecho una salida al parque Jungle Trek, hemos celebrado Sant Jordi y hemos organizado un certamen de lectura. Puedes leer más en la sección "Nuestras Actividades".';
+                }
+                
+                if (normalizedMessage.includes('noticia') || normalizedMessage.includes('notícia') || normalizedMessage.includes('novetat') || normalizedMessage.includes('novedad')) {
+                    return currentLang === 'ca'
+                        ? 'Torna aviat per no perdre\'t les properes notícies! Mentre tant, segueix-nos a les xarxes socials per estar al dia.'
+                        : '¡Vuelve pronto para no perderte las próximas noticias! Mientras tanto, síguenos en las redes sociales para estar al día.';
+                }
+                
+                if (normalizedMessage.includes('xarxa') || normalizedMessage.includes('red social') || normalizedMessage.includes('instagram') || normalizedMessage.includes('twitter')) {
+                    return currentLang === 'ca'
+                        ? 'Ens pots trobar a Instagram com @escola_la_canaleta i a Twitter com @Esc_La_Canaleta. Trobaràs els enllaços a la secció "Segueix-nos".'
+                        : 'Puedes encontrarnos en Instagram como @escola_la_canaleta y en Twitter como @Esc_La_Canaleta. Encontrarás los enlaces en la sección "Síguenos".';
+                }
+                
+                if (normalizedMessage.includes('escola') || normalizedMessage.includes('escuela') || normalizedMessage.includes('centre') || normalizedMessage.includes('centro')) {
+                    return currentLang === 'ca'
+                        ? 'L\'Escola La Canaleta és un centre educatiu públic amb més de 40 anys d\'història. Treballem per oferir una educació integral als nostres alumnes. Pots llegir-ne més a la secció "Sobre Nosaltres".'
+                        : 'La Escuela La Canaleta es un centro educativo público con más de 40 años de historia. Trabajamos para ofrecer una educación integral a nuestros alumnos. Puedes leer más en la sección "Sobre Nosotros".';
+                }
+                
+                // Default response
+                return currentLang === 'ca'
+                    ? 'Ho sento, no he entès la teva pregunta. Pots preguntar-me sobre horaris, activitats, ubicació o contacte.'
+                    : 'Lo siento, no he entendido tu pregunta. Puedes preguntarme sobre horarios, actividades, ubicación o contacto.';
+            }
+            
+            // Send message when button is clicked
+            sendMessage.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    chatInput.value = '';
+                    
+                    // Simulate thinking delay
+                    setTimeout(() => {
+                        const response = processMessage(message);
+                        addMessage(response);
+                    }, 1000);
+                }
+            });
+            
+            // Send message when Enter key is pressed
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage.click();
+                }
             });
         });
     </script>
