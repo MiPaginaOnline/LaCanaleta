@@ -671,8 +671,8 @@
             position: fixed;
             bottom: 25px;
             right: 25px;
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 50%;
             display: flex;
@@ -692,16 +692,16 @@
 
         .floating-call i {
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
 
         /* Chat Assistant */
         .chat-assistant {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
-            width: 70px;
-            height: 70px;
+            bottom: 100px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, var(--secondary), var(--accent));
             border-radius: 50%;
             display: flex;
@@ -720,13 +720,13 @@
 
         .chat-assistant i {
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
 
         .chat-container {
             position: fixed;
-            bottom: 110px;
-            left: 25px;
+            bottom: 175px;
+            right: 25px;
             width: 350px;
             height: 450px;
             background-color: white;
@@ -893,8 +893,18 @@
             .chat-container {
                 width: 280px;
                 height: 380px;
-                left: 15px;
-                bottom: 100px;
+                right: 15px;
+                bottom: 165px;
+            }
+            
+            .chat-assistant {
+                right: 15px;
+                bottom: 90px;
+            }
+            
+            .floating-call {
+                right: 15px;
+                bottom: 15px;
             }
         }
         
@@ -917,8 +927,17 @@
             
             .chat-container {
                 width: 90%;
-                left: 5%;
+                right: 5%;
                 height: 350px;
+            }
+            
+            .chat-assistant, .floating-call {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .chat-assistant i, .floating-call i {
+                font-size: 1.3rem;
             }
         }
     </style>
